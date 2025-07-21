@@ -1,3 +1,4 @@
+import time
 from flask import jsonify, request
 from flow.flow import (
     a_generate_questions,
@@ -17,7 +18,7 @@ async def chat(id):
     Returns:
         str: The chat response.
     """
-
+    start_time = time.time()
     data = request.get_json()
 
     if not data:
@@ -38,7 +39,7 @@ async def chat(id):
 
     if status == "not_started":
         await a_generate_questions(id)
-        question = await d_ask_questions(id)
+        question = await d_ask_questions(id, start_time=start_time)
         return jsonify({
             "message": "Interview started with first question.",
             "status": "in_progress",
@@ -56,7 +57,7 @@ async def chat(id):
             "data": is_finish
         })
 
-    question = await d_ask_questions(id)
+    question = await d_ask_questions(id, start_time=start_time)
     return jsonify({
         "message": "Interview is in progress.",
         "status": "in_progress",

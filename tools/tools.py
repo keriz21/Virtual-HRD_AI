@@ -34,15 +34,30 @@ def get_data_job(id):
         print(f"Error: {response.status_code}")
         return None
     
+def get_data_company(id):
+    url = f"{base_url}/api/company/id/{id}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Error: {response.status_code}")
+        return None
+
 def get_data_job_str(id):
     data = get_data_job(id)
     if data:
         job_desc = data['data']['description']
         skills = data['data']['skills']
+        company_id = data['data']['company_id']
+        company_data = get_data_company(company_id)
+        company_name = company_data['data']['name'] if company_data else "Unknown Company"
+        company_desc = company_data['data']['description'] if company_data else "No description available"
 
         skills_str = ', '.join(skills)
-        job_str = f"Deskripsi Pekerjaan: {job_desc}\n\nKeterampilan yang Diperlukan: {skills_str}"
+        job_str = f"Deskripsi Pekerjaan: {job_desc}\n\nKeterampilan yang Diperlukan: {skills_str}\n\nInformasi Perusahaan: {company_name}\n{company_desc} \n\n company_data: {company_data} \n\n company_id: {company_id}   "
         return job_str
+
+        # return data
         # return job_str
     else:
         print("Error: Unable to fetch job data.")
@@ -108,7 +123,7 @@ def get_last_question_log_interview(id):
     return None
 
     
-def post_log_interview(id, log, is_user=False):
+def post_log_interview(id, log, is_user=False, elapsed_time=None):
     """
     Post log to the interview with the given ID.
     Args:
@@ -119,8 +134,10 @@ def post_log_interview(id, log, is_user=False):
     url = f"{base_url}/api/interview/log/{id}"
     payload = {
         "sender": "user" if is_user else "assistant",
-        "message": log
+        "message": log,
+        "elapsed_time": elapsed_time
     }
+    print(f"Posting log to {url} with payload: {payload}")
     response = requests.put(url, json=payload)
     if response.status_code == 200:
         return response.json()

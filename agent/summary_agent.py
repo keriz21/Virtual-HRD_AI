@@ -21,5 +21,6 @@ summary_agent = Agent(
     name="SummaryAgent",
     instructions=PROMPT,
     model="gpt-4.1-mini-2025-04-14",
+    # model="litellm/gemini/gemini-2.5-pro",
     output_type=Summary,
 )

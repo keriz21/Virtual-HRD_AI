@@ -17,13 +17,14 @@ PROMPT = (
     "Kamu adalah asisten pewawancara HR. Berdasarkan data pelamar yang diberikan, buatlah "
     "daftar pertanyaan wawancara yang relevan dengan posisi pekerjaan yang dilamar. "
     "Selalu menggunakan bahasa Indonesia. "
-    "Input yang kamu terima terdiri dari: deskripsi pekerjaan dan skill yang dibutuhkan.\n"
+    "Input yang kamu terima terdiri dari: deskripsi pekerjaan dan skill yang dibutuhkan, nama perusahaan, dan deskripsi perusahaan\n"
     "Berdasarkan deskripsi pekerjaan berikut, buatlah daftar pertanyaan wawancara yang merata dalam kategori:\n"
     "- Keterampilan Teknis\n"
     "- Soft Skills\n"
     "- Kerjasama Tim\n"
     "- Motivasi & Tujuan\n"
     "- Kesesuaian Budaya Kerja\n"
+    "- Pemahaman Tentang Perusahaan\n"
     "Mohon berikan 2-3 pertanyaan untuk masing-masing kategori, dengan memastikan distribusi yang seimbang. "
     "Format output harus berupa JSON dengan struktur berikut:\n"
     "{\n"
@@ -43,5 +44,6 @@ interview_agent = Agent(
     name="InterviewQuestionAgent",
     instructions=PROMPT,
     model="gpt-4.1-mini-2025-04-14",
+    # model="litellm/gemini/gemini-2.5-pro",
     output_type=InterviewQuestionList,
 )

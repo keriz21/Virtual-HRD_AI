@@ -22,16 +22,28 @@ load_dotenv()
 
 
 async def main():
-    # print(await a_generate_questions('682c2a2e08157ab12005f047'))
-    # tools.push_answered_questions('682c2a2e08157ab12005f047', 'saya juga suka manusia kok')
-    # print(await d_ask_questions('682c2a2e08157ab12005f047'))
-    # tools.push_answered_questions('682c3b26d60e12ac9c94dc5c', 'saya sangat suka jawaban anda? anda pantas menerima jabatan ini')
-    # print(tools.get_answered_questions('682c3b26d60e12ac9c94dc5c'))
-    # print(await c_review_summary('682c44e2a31ffac7c69ffcd5'))
-    # print(await c_review_summary('682d5c32401b5af76cf861ca'))
-    # print(tools.get_status_interview('682f493a6bf9b22e5c0b3168'))
-    print(await c_review_summary('684a49bbbb946aef7d7705ff'))
-    print(tools.get_status_interview('684a49bbbb946aef7d7705ff'))
+
+    print(await c_review_summary("687bd1ef66018c9885d8156a"))
+
+    # list_pertanyaan = tools.get_interview_questions("687ba1c466018c9885d81564")
+    # data_ringkasan = tools.get_summary_interview("687ba1c466018c9885d81564")
+    # data_ringkasan_result = data_ringkasan['data']['summary']
+    # answered_questions = tools.get_answered_questions("687ba1c466018c9885d81564")
+
+    # print(f"List Pertanyaan: {list_pertanyaan}")
+    # print(f"Data Ringkasan: {data_ringkasan_result}")
+    # print(f"Answered Questions: {answered_questions}")
     pass
 
 asyncio.run(main())
+
+# import tools.tools as tools
+
+# def main():
+#     # print(tools.get_data_)
+#     # print(tools.get_data_job('68493a93d032d9778a22eab8'))
+#     print(tools.get_data_job_str('687b124603281026efe96e04'))
+
+#     # print(tools.get_data_company('687a092f03281026efe96dfd'))
+# if __name__ == "__main__":
+#     main()
